@@ -1,0 +1,42 @@
+services:
+  hello1:
+    hostname: hello1
+    image: hello-docker:latest
+    environment:
+      - SERVICE_NAME=hello1
+      - PORT=8080
+    expose:
+      - "8080/tcp"
+
+  hello2:
+    hostname: hello2
+    image: hello-docker:latest
+    environment:
+      - SERVICE_NAME=hello2
+      - PORT=8080
+    expose:
+      - "8080/tcp"
+
+  hello3:
+    hostname: hello3
+    image: hello-docker:latest
+    environment:
+      - SERVICE_NAME=hello3
+      - PORT=8080
+    expose:
+      - "8080/tcp"
+
+  balancer1:
+    hostname: balancer1
+    image: haproxy:2.5.0
+    volumes:
+      - type: bind
+        source: ./haproxy/haproxy.cfg
+        target: /usr/local/etc/haproxy/haproxy.cfg
+    depends_on:
+      - "hello1"
+      - "hello2"
+      - "hello3"
+    ports:
+      - "80:80"
+      - "9000:9000"
