@@ -1,7 +1,16 @@
+version: '3.8'
+
 services:
   hello1:
     hostname: hello1
     image: hello-docker:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        IMAGE_CREATE_DATE: ${BUILD_DATE}
+        IMAGE_VERSION: 2
+        IMAGE_SOURCE_REVISION: 10
     environment:
       - SERVICE_NAME=hello1
       - PORT=8080
@@ -11,6 +20,8 @@ services:
   hello2:
     hostname: hello2
     image: hello-docker:latest
+    depends_on:
+      - hello1
     environment:
       - SERVICE_NAME=hello2
       - PORT=8080
@@ -20,6 +31,8 @@ services:
   hello3:
     hostname: hello3
     image: hello-docker:latest
+    depends_on:
+      - hello1
     environment:
       - SERVICE_NAME=hello3
       - PORT=8080
