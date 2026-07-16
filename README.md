@@ -67,7 +67,7 @@ docker compose down -v
 
 ```bash
 # 1. Создать пользовательскую сеть
-docker create network net
+docker network create net
 
 # 2. Собрать образ приложения
 docker build -t hello-docker https://github.com/albert-haliulov/hello-docker.git

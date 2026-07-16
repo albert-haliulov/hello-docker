@@ -67,7 +67,7 @@ For comparison, here's how you would manage the same application using only Dock
 
 ```bash
 # 1. Create a custom network
-docker create network net
+docker network create net
 
 # 2. Build the application image
 docker build -t hello-docker https://github.com/albert-haliulov/hello-docker.git
