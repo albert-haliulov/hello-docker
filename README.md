@@ -78,7 +78,7 @@ docker run -d --rm --name hello2 --net-alias hello --network net -p 8082:8080 he
 docker run -d --rm --name hello3 --net-alias hello --network net -p 8083:8080 hello-docker
 
 # 4. Запустить балансировщик нагрузки (требует ручного монтирования тома)
-docker run -d --rm --name balancer1 --network net \
+docker run -d --rm --name lb --network net \
   -v /home/user1/hello-docker/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg \
   -p 80:80 -p 9000:9000 haproxy:2.5.0
 
@@ -86,7 +86,7 @@ docker run -d --rm --name balancer1 --network net \
 while true; do curl -s http://localhost; sleep 1; done
 
 # 6. Остановка всех сервисов (требует перечисления каждого контейнера)
-docker stop hello1 hello2 hello3 balancer1
+docker stop hello1 hello2 hello3 lb
 ```
 
 ## Сравнение Docker Compose и Docker CLI

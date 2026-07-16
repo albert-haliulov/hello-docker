@@ -39,8 +39,8 @@ services:
     expose:
       - "8080/tcp"
 
-  balancer1:
-    hostname: balancer1
+  lb:
+    hostname: lb
     image: haproxy:2.5.0
     volumes:
       - type: bind
